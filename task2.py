@@ -1,31 +1,34 @@
 import numpy as np
 from scipy.integrate import odeint
-
-def pend(yy, t, b, c):
-    [y0, y1] = yy
-    yyp = [a * (y0 - y0 * y1), b * (-y1 + y0 * y1)]
-    return yyp
+import matplotlib.pyplot as plt
+   
+def pend(y, t, b, c):
+    [y0, y1] = y
+    yp = [b * (y0 - y0 * y1), c * (-y1 + y0 * y1)]
+    return yp
 
 if __name__ == "__main__":
     a = 1
     b = 0.2
-    y0 = 0.1
-    y1 = 1.0
+    y0_0 = 0.1
+    y1_0 = 1.0
+        
+    y_0 = [y0_0,y1_0]
     
-    y0p = a * (y0 - y0 * y1)
-    y1p = b * (-y1 + y0 * y1)
+    t= np.linspace(0,5, 100)
     
+    sol = odeint(pend,y_0,t,args=(a,b))
     
-    yy0 = [0.1,1.0] #[y0,y1]
-    
-    t= np.linspace(0,5, 5+1)
-    
-    sol = odeint(pend,yy0,t, args=(a,b))
-    
-    import matplotlib.pyplot as plt
-    plt.plot(t, sol[:, 0], 'b', label='theta(t)')
-    plt.plot(t, sol[:, 1], 'g', label='omega(t)')
+    plt.plot(t, sol[:, 0], 'b', label='y0(t)')
+    plt.plot(t, sol[:, 1], 'g', label='y1(t)')
     plt.legend(loc='best')
-    plt.xlabel('t')
+    plt.xlabel('t (years)')
+    plt.grid()
+    plt.show()
+    
+    
+    plt.plot(sol[:,1], sol[:,0])
+    plt.ylabel('y0')
+    plt.xlabel('y1')
     plt.grid()
     plt.show()
