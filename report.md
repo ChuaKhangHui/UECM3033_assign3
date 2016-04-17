@@ -24,7 +24,7 @@ where w = weight, n = number of nodes
 
 Explain how you get the weights and nodes used in the Gauss-Legendre quadrature.
 
-Weight and nodes can be get by numpy.polynomial.legendre.leggauss(deg) where deg is the number of nodes
+Weight and nodes can be get by numpy.polynomial.legendre.leggauss(deg) where deg is the number of nodes.
 Nodes will be go through a transformation to match the domain we interested.
 
 ---------------------------------------------------------
@@ -39,6 +39,7 @@ The basic usage of odeint is `odeint(func, y0, t, args=(a, b))`, where func is a
 In our case, function will define the differential equations
 
 ![y0p.png](y0p.png)
+
 ![y1p.png](y1p.png)
 
 y0 is the initial state of \[y0(0),y1(0)], t will be the time point from 0 to 5years, and args(a,b) will be \[1.0, 0.2].
